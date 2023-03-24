@@ -99,6 +99,7 @@ class MyApp extends StatelessWidget {
         BeverageScreen.routeName: (context) => BeverageScreen(),
         RestruantScreen.routeName: (context) => RestruantScreen(),
         MyPastOrders.routeName: (context) => MyPastOrders(),
+        ResturantEditScreen.routeName: (context) => ResturantEditScreen(),
       },
     );
   }

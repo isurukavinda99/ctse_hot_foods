@@ -75,6 +75,15 @@ class MoreScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
+                  MoreCard(
+                    image: Image.asset(
+                      Utill.getAssetName("more.png", "staticIcons"),
+                    ),
+                    name: "Add Restaurant",
+                    handler: () {
+                      Navigator.of(context).pushNamed(ResturantEditScreen.routeName);
+                    },
+                  ),
                 ]),
               ),
             ),
