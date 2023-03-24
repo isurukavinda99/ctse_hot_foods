@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../const/colors.dart';
 import 'loginScreen.dart';
 import '../../utils/Utill.dart';
@@ -50,11 +51,13 @@ class SignUpScreen extends StatelessWidget {
               CustomTextInput(
                 hintText: "Password",
                 controller: passwordController,
+                isPassword: true,
               ),
               Spacer(),
               CustomTextInput(
                 hintText: "Confirm Password",
                 controller: passwordReController,
+                isPassword: true,
               ),
               Spacer(),
               SizedBox(
@@ -74,12 +77,29 @@ class SignUpScreen extends StatelessWidget {
                         password.isEmpty ||
                         confirmPassword.isEmpty) {
                       print("Please fill required fields");
+                      Fluttertoast.showToast(
+                          msg: "Please fill required fields",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.green,
+                          textColor: Colors.black,
+                          fontSize: 16.0
+                      );
                       return;
                     }
 
                     if (password != confirmPassword) {
                       print("Passwords does not match");
-
+                      Fluttertoast.showToast(
+                          msg: "Passwords does not match",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.green,
+                          textColor: Colors.black,
+                          fontSize: 16.0
+                      );
                       return;
                     }
 
@@ -113,8 +133,26 @@ class SignUpScreen extends StatelessWidget {
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'email-already-in-use') {
                         print("Email is already in exist");
+                        Fluttertoast.showToast(
+                            msg: "Email is already in exist",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.green,
+                            textColor: Colors.black,
+                            fontSize: 16.0
+                        );
                       } else if (e.code == 'weak-password') {
                         print("Password is weak");
+                        Fluttertoast.showToast(
+                            msg: "Password is weak",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.green,
+                            textColor: Colors.black,
+                            fontSize: 16.0
+                        );
                       }
                     } catch (e) {
                       print("Connection error");
