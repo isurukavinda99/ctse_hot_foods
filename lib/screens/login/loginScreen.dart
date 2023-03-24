@@ -6,7 +6,7 @@ import '../../const/colors.dart';
 import '../../utils/Utill.dart';
 import '../../widgets/CustomTextInput.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:hot_foots/screens/login/signUpScreen.dart';
 import '../menu/PromotionScreen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -154,12 +154,8 @@ class LoginScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.of(context)
-                    //     .pushReplacementNamed(SignUpScreen.routeName);
-                    // MenuItemDao().addRecipe("double burger", "https://th.bing.com/th/id/OIP.eSsMod4TbBTCEU_apxwNZQHaFj?pid=ImgDet&rs=1", "kfc", 4, 'burger');
-                    // MenuItemDao().addRecipe("big king", "https://th.bing.com/th/id/R.bf08bef8ce284e7db0702958d9e17ffd?rik=mkyECyyPxVfmOQ&pid=ImgRaw&r=0", "burger king", 4, 'burger');
                     Navigator.of(context)
-                        .pushReplacementNamed(MyOrderScreen.routeName);
+                        .pushReplacementNamed(SignUpScreen.routeName);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
