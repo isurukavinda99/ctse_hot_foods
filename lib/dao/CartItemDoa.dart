@@ -11,14 +11,14 @@ class CartItemDoa {
   final CollectionReference itemCollection =
       FirebaseFirestore.instance.collection('cart');
 
-  Future addCartItem(
-      String userId, String item, bool status, int number, double price) async {
+  Future addCartItem(String userId, String item, bool status, int number,
+      double price, int quantity) async {
     return await itemCollection.add({
       "userId": userId,
       "item": item,
       "status": status,
       "number": number,
-      "price": price
+      "price": price,
     });
   }
 

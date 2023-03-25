@@ -5,6 +5,7 @@ import 'package:hot_foods/screens/other/MyOrderScreen.dart';
 import '../../const/colors.dart';
 import '../../utils/Utill.dart';
 import '../../widgets/CustomTextInput.dart';
+import 'package:hot_foots/screens/menu/menuAdminScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hot_foots/screens/login/signUpScreen.dart';
 import '../menu/PromotionScreen.dart';
@@ -69,8 +70,14 @@ class LoginScreen extends StatelessWidget {
                         LoginConst.uid = userCredential.user?.uid;
 
                         if (userCredential.user != null) {
-                          Navigator.of(context)
+                          if(email == "hotfoods@gmail.com" && password == "admin1234"){
+                             Navigator.of(context)
+                              .pushReplacementNamed(MenuAdminScreen.routeName);
+                          }
+                          else {
+                            Navigator.of(context)
                               .pushReplacementNamed(MenuScreen.routeName);
+                          }
                         }
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {

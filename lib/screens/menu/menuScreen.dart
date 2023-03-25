@@ -145,7 +145,7 @@ class MenuScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  name: "Desserts",
+                                  name: "Food Items",
                                   count: "135",
                                 ),
                               ),

@@ -9,10 +9,14 @@ import './screens/landingScreen.dart';
 import 'screens/login/loginScreen.dart';
 import 'screens/login/signUpScreen.dart';
 import 'screens/menu/menuScreen.dart';
+import 'screens/menu/menuAdminScreen.dart';
 import 'screens/other/MoreScreen.dart';
 import './screens/profileScreen.dart';
+import 'package:hot_foots/screens/menu/DeleteRes.dart';
 import 'screens/menu/DessertsScreen.dart';
 import 'screens/other/individualItem.dart';
+import 'package:hot_foots/screens/other/AdminPromotionScreen.dart';
+import 'screens/other/UpdatePromotionScreen.dart';
 import 'screens/other/paymentScreen.dart';
 import 'screens/other/aboutScreen.dart';
 import 'screens/other/MyOrderScreen.dart';
@@ -87,7 +91,9 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
         MenuScreen.routeName: (context) => MenuScreen(),
-        PromotionScreen.routeName: (context) => PromotionScreen(),
+        MenuAdminScreen.routeName:(context) => MenuAdminScreen(),
+        PromotionScreen.routeName:(context) => PromotionScreen(),
+        AdminPromotionScreen.routeName:(context) => AdminPromotionScreen(),
         ProfileScreen.routeName: (context) => ProfileScreen(),
         MoreScreen.routeName: (context) => MoreScreen(),
         DessertsScreen.routeName: (context) => DessertsScreen(),
@@ -100,6 +106,8 @@ class MyApp extends StatelessWidget {
         RestruantScreen.routeName: (context) => RestruantScreen(),
         MyPastOrders.routeName: (context) => MyPastOrders(),
         ResturantEditScreen.routeName: (context) => ResturantEditScreen(),
+        UpdatePromotionScreen.routeName:(context) => UpdatePromotionScreen(),
+        DeleteRes.routeName:(context) => DeleteRes(),
       },
     );
   }

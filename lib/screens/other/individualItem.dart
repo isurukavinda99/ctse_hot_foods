@@ -293,8 +293,8 @@ class IndividualItem extends StatelessWidget {
                                                           Text(
                                                             itemCont.toString(),
                                                             style: TextStyle(
-                                                              color: AppColor
-                                                                  .base,
+                                                              color:
+                                                                  AppColor.base,
                                                             ),
                                                           ),
                                                         ],
@@ -426,28 +426,30 @@ class IndividualItem extends StatelessWidget {
                                                                 firestore
                                                                     .collection(
                                                                         'cart')
-                                                                    .add({
-                                                                  'userId':
-                                                                      userId,
-                                                                  'item':
-                                                                      menuItem
+                                                                    .doc(menuItem.name.replaceAll(
+                                                                            " ",
+                                                                            "") +
+                                                                        userId)
+                                                                    .set({
+                                                                      'userId':
+                                                                          userId,
+                                                                      'item': menuItem
                                                                           .name,
-                                                                  'status':
-                                                                      false,
-                                                                  'number':
-                                                                      itemCont,
-                                                                  'price':
-                                                                      menuItem
-                                                                          .price
-                                                                }).then(
-                                                                        (value) {
-                                                                  print(
-                                                                      ' added: ${value.id}');
-                                                                }).catchError(
+                                                                      'status':
+                                                                          false,
+                                                                      'number':
+                                                                          itemCont,
+                                                                      'price':
+                                                                          menuItem
+                                                                              .price,
+                                                                    })
+                                                                    .then(
+                                                                        (value) {})
+                                                                    .catchError(
                                                                         (error) {
-                                                                  print(
-                                                                      'Error adding credit card: $error');
-                                                                });
+                                                                      print(
+                                                                          'Error adding credit card: $error');
+                                                                    });
 
                                                                 Navigator.of(
                                                                         context)

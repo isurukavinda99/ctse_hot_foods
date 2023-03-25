@@ -20,7 +20,7 @@ class CartItemModel {
       'item': item,
       'status': status,
       'number': number,
-      'price': price
+      'price': price,
     };
   }
 }

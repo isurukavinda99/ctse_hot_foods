@@ -8,6 +8,8 @@ import 'package:hot_foods/widgets/CustomNavBar.dart';
 
 import '../../const/LogginConst.dart';
 import '../../dao/CheckOutDoa.dart';
+import '../../widgets/BurgerCard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyOrderScreen extends StatefulWidget {
   static const routeName = "/myOrderScreen";
@@ -20,9 +22,12 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
 
   bool _isLoading = true;
 
+  int _selectedQuantity = 1;
+
   @override
   void initState() {
     _loadItems();
+    super.initState();
   }
 
   Future<void> _loadItems() async {
@@ -43,6 +48,77 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
       });
     }
   }
+
+  // void _deleteItem(int index) {
+  //   setState(() {
+  //     _items.removeAt(index);
+  //   });
+  // }
+  void _deleteItem(int index) async {
+    final item = _items[index];
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Delete Item'),
+        content: Text('Are you sure you want to delete this item?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              FirebaseFirestore firestore = FirebaseFirestore.instance;
+              firestore
+                  .collection('cart')
+                  .doc(item.item.replaceAll(" ", "") + item.userId)
+                  .delete();
+              Navigator.of(context).pop(true);
+            },
+            child: Text('Delete'),
+          ),
+        ],
+      ),
+    );
+    if (confirm == true) {
+      setState(() {
+        _items.removeAt(index);
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: AppColor.primary,
+          content: Row(
+            children: [
+              Icon(
+                Icons.check_circle_outline,
+                color: Colors.white,
+              ),
+              SizedBox(width: 8),
+              Text(
+                '${item.item} successfully deleted',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          duration: Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      );
+    }
+  }
+
+// void _deleteItem(int index) async {
+//   final item = _items[index];
+//   setState(() {
+//     _items.removeAt(index);
+//   });
+//   await CartItemDoa().deleteCartItem(item.id);
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +154,6 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                   color: AppColor.placeholderBg,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-
                     child: Container(
                       height: 300,
                       child: _isLoading
@@ -95,6 +170,13 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                                   child: BurgerCard(
                                     price: rest.price.toString(),
                                     name: rest.item,
+                                    onDelete: () => _deleteItem(index),
+                                    onQuantityChange: (quantity) {
+                                      setState(() {
+                                        _items[index].number =
+                                            quantity; // Update the quantity of the item
+                                      });
+                                    },
                                   ),
                                 );
                               },
@@ -102,7 +184,6 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                     ),
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
@@ -130,58 +211,6 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
             left: 0,
             child: CustomNavBar(),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class BurgerCard extends StatelessWidget {
-  const BurgerCard({
-    Key key,
-    String name,
-    String price,
-    bool isLast = false,
-  })  : _name = name,
-        _price = price,
-        _isLast = isLast,
-        super(key: key);
-
-  final String _name;
-  final String _price;
-  final bool _isLast;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: _isLast
-              ? BorderSide.none
-              : BorderSide(
-                  color: AppColor.placeholder.withOpacity(0.25),
-                ),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              "${_name}",
-              style: TextStyle(
-                color: AppColor.primary,
-                fontSize: 16,
-              ),
-            ),
-          ),
-          Text(
-            "RS $_price",
-            style: TextStyle(
-              color: AppColor.primary,
-              fontSize: 16,
-              fontWeight: FontWeight.w900,
-            ),
-          )
         ],
       ),
     );

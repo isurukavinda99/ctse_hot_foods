@@ -42,4 +42,8 @@ class ResturantItemDao {
   Stream<List<ResturantItem>> listRestaurant() {
     return restContoller.snapshots().map(RestaurantList);
   }
+
+  Stream<List<ResturantItem>> deleteItem(String id) {
+    return restContoller.where('id', isEqualTo: "veO2QSpUYrtyFhT9JYWt").snapshots().map(RestaurantList);
+  }
 }

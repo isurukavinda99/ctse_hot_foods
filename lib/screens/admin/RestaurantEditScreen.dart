@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hot_foots/const/LogginConst.dart';
 import 'package:hot_foots/const/colors.dart';
 import 'package:hot_foots/screens/login/loginScreen.dart';
+import 'package:hot_foots/screens/menu/DeleteRes.dart';
 import 'package:hot_foots/screens/menu/menuScreen.dart';
 import 'package:hot_foots/utils/Utill.dart';
 import 'package:hot_foots/widgets/CustomNavBar.dart';
@@ -147,7 +148,11 @@ class ResturantEditScreen extends StatelessWidget {
                           },
                           child: Text("Save"),
                         ),
-                      )
+                      ),
+                      ElevatedButton(onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(
+                            DeleteRes.routeName);
+                      }, child: Text("Delete"))
                     ],
                   ),
                 ),

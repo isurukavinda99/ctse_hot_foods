@@ -8,6 +8,7 @@ import 'package:hot_foods/widgets/CustomNavBar.dart';
 import 'package:hot_foods/widgets/SearchText.dart';
 
 import '../../widgets/MenuItemCardWidget.dart';
+import '../other/MyOrderScreen.dart';
 
 class DessertsScreen extends StatefulWidget {
   static const routeName = '/dessertScreen';
@@ -74,12 +75,18 @@ class _DessertsScreenState extends State<DessertsScreen> {
                 SizedBox(width: 5),
                 Expanded(
                   child: Text(
-                    DessertsScreen.screenName,
+                    "Food Items",
                     style: Utill.getTheme(context).headline5,
                   ),
                 ),
-                Image.network(
-                  Utill.getAssetName("cart.png", "staticIcons"),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(MyOrderScreen.routeName,
+                        arguments: LoginConst.uid);
+                  },
+                  child: Image.network(
+                    Utill.getAssetName("cart.png", "staticIcons"),
+                  ),
                 ),
               ],
             ),
